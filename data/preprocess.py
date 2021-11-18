@@ -27,7 +27,7 @@ emotion_labels = ['Angry', 'Disgust', 'Fear', 'Happy', 'Sad', 'Surprise', 'Neutr
 def split_data(df,dataName):
     # convert pixel string to list of ints 
     df['pixels'] = df['pixels'].apply(lambda pixel_seq: [int(pixel) for pixel in pixel_seq.split()])
-    data_X = np.array(df['pixels'].tolist(), dtype='float32').reshape(-1,48, 48,1)/255.0  
+    data_X = tf.convert_to_tensor(np.array(df['pixels'].tolist(), dtype='float32').reshape(-1,48, 48,1)/255.0)
     # one hot enconding 
     data_Y = tf.keras.utils.to_categorical(df['emotion'], len(emotion_labels))  
     return data_X, data_Y
