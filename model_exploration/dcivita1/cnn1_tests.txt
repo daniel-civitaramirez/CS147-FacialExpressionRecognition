@@ -1,0 +1,87 @@
+
+
+
+CNN: Test Accuracy is 0.8630644083023071, Test Loss is 0.37961718440055847 
+Val Accuracy is 0.5609543919563293, Val Loss is 1.5362569093704224 
+Batch size - 64, Learning Rate - 0.001, Dropout Rate - 0.1, Dense - 16 
+Conv2d - features - 16, kernel - (3, 3), strides - (1, 1), padding - same, MaxPool2D - pool - (2, 2), stride - (2, 2). 
+
+
+CNN: Test Accuracy is 0.9007706642150879, Test Loss is 0.275005966424942 
+Val Accuracy is 0.540229856967926, Val Loss is 1.8652172088623047 
+Batch size - 64, Learning Rate - 0.001, Dropout Rate - 0.1, Dense - 32 
+Conv2d - features - 16, kernel - (3, 3), strides - (1, 1), padding - same, MaxPool2D - pool - (2, 2), stride - (2, 2). 
+
+
+CNN: Test Accuracy is 0.7719771862030029, Test Loss is 0.6142522692680359 
+Val Accuracy is 0.5003483295440674, Val Loss is 1.4282071590423584 
+Batch size - 64, Learning Rate - 0.001, Dropout Rate - 0.2, Dense - 16 
+Conv2d - features - 16, kernel - (3, 3), strides - (1, 1), padding - same, MaxPool2D - pool - (2, 2), stride - (2, 2). 
+
+
+CNN: Test Accuracy is 0.8293638825416565, Test Loss is 0.4655792713165283 
+Val Accuracy is 0.5405781865119934, Val Loss is 1.411667823791504 
+Batch size - 64, Learning Rate - 0.001, Dropout Rate - 0.2, Dense - 32 
+Conv2d - features - 16, kernel - (3, 3), strides - (1, 1), padding - same, MaxPool2D - pool - (2, 2), stride - (2, 2). 
+
+
+CNN: Test Accuracy is 0.9481865167617798, Test Loss is 0.1525561660528183 
+Val Accuracy is 0.5653082728385925, Val Loss is 1.9966483116149902 
+Batch size - 64, Learning Rate - 0.001, Dropout Rate - 0.1, Dense - 16 
+Conv2d - features - 32, kernel - (3, 3), strides - (1, 1), padding - same, MaxPool2D - pool - (2, 2), stride - (2, 2). 
+
+
+CNN: Test Accuracy is 0.952671229839325, Test Loss is 0.13636431097984314 
+Val Accuracy is 0.5600835680961609, Val Loss is 2.2008700370788574 
+Batch size - 64, Learning Rate - 0.001, Dropout Rate - 0.1, Dense - 32 
+Conv2d - features - 32, kernel - (3, 3), strides - (1, 1), padding - same, MaxPool2D - pool - (2, 2), stride - (2, 2). 
+
+
+CNN: Test Accuracy is 0.8934993743896484, Test Loss is 0.2954123914241791 
+Val Accuracy is 0.5717520117759705, Val Loss is 1.5109312534332275 
+Batch size - 64, Learning Rate - 0.001, Dropout Rate - 0.2, Dense - 16 
+Conv2d - features - 32, kernel - (3, 3), strides - (1, 1), padding - same, MaxPool2D - pool - (2, 2), stride - (2, 2). 
+
+
+CNN: Test Accuracy is 0.9146601557731628, Test Loss is 0.23524370789527893 
+Val Accuracy is 0.5543364882469177, Val Loss is 1.7620551586151123 
+Batch size - 64, Learning Rate - 0.001, Dropout Rate - 0.2, Dense - 32 
+Conv2d - features - 32, kernel - (3, 3), strides - (1, 1), padding - same, MaxPool2D - pool - (2, 2), stride - (2, 2). 
+
+
+CNN: Test Accuracy is 0.9238472580909729, Test Loss is 0.21631962060928345 
+Val Accuracy is 0.5566005110740662, Val Loss is 1.8594447374343872 
+Batch size - 64, Learning Rate - 0.001, Dropout Rate - 0.1, Dense - 16 
+Conv2d - features - 16, kernel - (5, 5), strides - (1, 1), padding - same, MaxPool2D - pool - (2, 2), stride - (2, 2). 
+
+
+CNN: Test Accuracy is 0.9385640025138855, Test Loss is 0.1728411167860031 
+Val Accuracy is 0.5714036822319031, Val Loss is 2.112541437149048 
+Batch size - 64, Learning Rate - 0.001, Dropout Rate - 0.1, Dense - 32 
+Conv2d - features - 16, kernel - (5, 5), strides - (1, 1), padding - same, MaxPool2D - pool - (2, 2), stride - (2, 2). 
+
+
+CNN: Test Accuracy is 0.854486882686615, Test Loss is 0.40204644203186035 
+Val Accuracy is 0.5398815870285034, Val Loss is 1.526559829711914 
+Batch size - 64, Learning Rate - 0.001, Dropout Rate - 0.2, Dense - 16 
+Conv2d - features - 16, kernel - (5, 5), strides - (1, 1), padding - same, MaxPool2D - pool - (2, 2), stride - (2, 2). 
+
+
+CNN: Test Accuracy is 0.878216564655304, Test Loss is 0.3344488739967346 
+Val Accuracy is 0.537617564201355, Val Loss is 1.781591534614563 
+Batch size - 64, Learning Rate - 0.001, Dropout Rate - 0.2, Dense - 32 
+Conv2d - features - 16, kernel - (5, 5), strides - (1, 1), padding - same, MaxPool2D - pool - (2, 2), stride - (2, 2). 
+
+
+CNN: Test Accuracy is 0.9679104685783386, Test Loss is 0.09694568067789078 
+Val Accuracy is 0.559909462928772, Val Loss is 2.0142099857330322 
+Batch size - 64, Learning Rate - 0.001, Dropout Rate - 0.1, Dense - 16 
+Conv2d - features - 32, kernel - (5, 5), strides - (1, 1), padding - same, MaxPool2D - pool - (2, 2), stride - (2, 2). 
+
+
+CNN: Test Accuracy is 0.9666478037834167, Test Loss is 0.09804023802280426 
+Val Accuracy is 0.5532915592193604, Val Loss is 2.2513139247894287 
+Batch size - 64, Learning Rate - 0.001, Dropout Rate - 0.1, Dense - 32 
+Conv2d - features - 32, kernel - (5, 5), strides - (1, 1), padding - same, MaxPool2D - pool - (2, 2), stride - (2, 2). 
+
+
