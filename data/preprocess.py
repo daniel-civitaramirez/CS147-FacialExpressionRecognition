@@ -20,7 +20,7 @@ def _split_data(df: pd.DataFrame):
     df['pixels'] = df['pixels'].apply(lambda pixel_seq: [int(pixel) for pixel in pixel_seq.split()])
     x = tf.convert_to_tensor(np.array(df['pixels'].tolist(), dtype='float32').reshape(-1, _IMAGE_DIM, _IMAGE_DIM, 1) / 255.0)
     # one hot enconding emotion labels
-    y = tf.keras.utils.to_categorical(df['emotion'], len(EMOTION_CLASSIFICATION))
+    y = tf.convert_to_tensor(tf.keras.utils.to_categorical(df['emotion'], len(EMOTION_CLASSIFICATION)))
     return x, y
 
 def get_data(train_data_file_paths: list = _DEFAULT_TRAIN_FILEPATH, test_data_file_path: str = _DEFAULT_TEST_FILEPATH):
