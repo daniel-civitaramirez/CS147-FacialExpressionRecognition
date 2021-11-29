@@ -3,8 +3,16 @@ from tensorflow.keras import datasets, layers, models
 from tensorflow.keras.optimizers import Adam
 from model_param import ConvulationParameters, MaxPoolParameters
 
+CONV2D_1 = ConvulationParameters(features=64, kernel=(3, 3), strides=(1, 1), padding='same')
+CONV2D_2 = ConvulationParameters(features=128, kernel=(3, 3), strides=(1, 1), padding='same')
+CONV2D_3 = ConvulationParameters(features=256, kernel=(3, 3), strides=(1, 1), padding='same')
+MAXPOOL = MaxPoolParameters(pool=(2, 2), stride=(2, 2))
+DENSE_UNIT = 128
+EMOTION_CATEGORIES = 7
 
-def generateCNN2(conv_param1, conv_param2, conv_param3, maxpool_param, dense_unit, emotion_categories=7):
+
+def generateCNN2(conv_param1=CONV2D_1, conv_param2=CONV2D_2, conv_param3=CONV2D_3, maxpool_param=MAXPOOL, dense_unit=DENSE_UNIT, 
+                emotion_categories=EMOTION_CATEGORIES):
     model = models.Sequential()
 
     model.add(layers.Conv2D(filters=conv_param1.features, kernel_size=conv_param1.kernel, strides=conv_param1.strides, 

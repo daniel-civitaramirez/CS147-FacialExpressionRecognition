@@ -84,7 +84,7 @@ def explore_model2(x, y):
             for conv_param3 in conv2ds_3:
                 model = generateCNN2(conv_param1, conv_param2, conv_param3, maxpool_param, dense_unit)
                 model.compile(optimizer=Adam(lr=learning_rate), loss='categorical_crossentropy', metrics=['accuracy'])
-                history = model.fit(x=x, y=y, batch_size=batch_size, epochs=1, validation_split=0.2, verbose=2)
+                history = model.fit(x=x, y=y, batch_size=batch_size, epochs=30, validation_split=0.2, verbose=2)
                 final_accuracy, final_loss = history.history['accuracy'][-1], history.history['loss'][-1]
                 val_accuracy, val_loss = history.history['val_accuracy'][-1], history.history['val_loss'][-1]
                 write_to_file2(final_accuracy, final_loss, val_accuracy, val_loss, learning_rate, batch_size,
@@ -148,4 +148,4 @@ if __name__ == "__main__":
     x_train, y_train, x_test, y_test = get_data(_DEFAULT_TRAIN_FILEPATH, _DEFAULT_TEST_FILEPATH)
 
     explore_model2(x_train, y_train)
-    #explore_model3(x_train, y_train)
+    explore_model3(x_train, y_train)

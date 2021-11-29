@@ -3,7 +3,14 @@ from tensorflow.keras import datasets, layers, models
 from tensorflow.keras.optimizers import Adam
 from model_param import ConvulationParameters, MaxPoolParameters
 
-def generateCNN(conv_param, maxpool_param, dropout_rate, dense_unit, emotion_categories=7):
+CONV2D = ConvulationParameters(features=16, kernel=(5, 5), strides=(1, 1), padding='same')
+MAXPOOL = MaxPoolParameters(pool=(2, 2), stride=(2, 2))
+DROPOUT_RATE = 0.2
+DENSE_UNIT = 32
+EMOTION_CATEGORIES = 7
+
+
+def generateCNN(conv_param=CONV2D, maxpool_param=MAXPOOL, dropout_rate=DROPOUT_RATE, dense_unit=DENSE_UNIT, emotion_categories=7):
     model = models.Sequential()
 
     model.add(layers.Conv2D(filters=conv_param.features, kernel_size=conv_param.kernel, strides=conv_param.strides, 
@@ -51,3 +58,4 @@ def generateCNN(conv_param, maxpool_param, dropout_rate, dense_unit, emotion_cat
     model.add(layers.Dense(units=emotion_categories, activation='softmax'))
     
     return model
+
