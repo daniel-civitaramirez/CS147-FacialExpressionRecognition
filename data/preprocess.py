@@ -3,37 +3,36 @@ import pandas as pd
 import numpy as np
 import gzip
 
-
 _DEFAULT_TRAIN_FILEPATH = ['train_data_1.gz', 'train_data_2.gz', 'train_data_3.gz', 'train_data_4.gz']
 _DEFAULT_TEST_FILEPATH = 'test_data.gz'
+_IMAGE_DIM = 48
+EMOTION_CLASSIFICATION = {0: 'Angry', 1: 'Digust', 2: 'Fear', 3: 'Happy', 4: 'Sad', 5: 'Surprise', 6: 'Neutral'}
 
+def _merge_train_data(train_data_file_paths: list):
+    train_data_list = []
+    for file_path in train_data_file_paths:
+        train_data = pd.read_csv(file_path, compression='gzip')
+        train_data_list.append(train_data)
+    return pd.concat(train_data_list)
+
+def _split_data(df: pd.DataFrame):
+    # convert pixel string to list of ints
+    df['pixels'] = df['pixels'].apply(lambda pixel_seq: [int(pixel) for pixel in pixel_seq.split()])
+    x = tf.convert_to_tensor(np.array(df['pixels'].tolist(), dtype='float32').reshape(-1, _IMAGE_DIM, _IMAGE_DIM, 1) / 255.0)
+    # one hot enconding emotion labels
+    y = tf.convert_to_tensor(tf.keras.utils.to_categorical(df['emotion'], len(EMOTION_CLASSIFICATION)))
+    return x, y
 
 def get_data(train_data_file_paths: list = _DEFAULT_TRAIN_FILEPATH, test_data_file_path: str = _DEFAULT_TEST_FILEPATH):
+    train_data = _merge_train_data(train_data_file_paths)
     test_data = pd.read_csv(test_data_file_path, compression='gzip')
-    test_data = test_data.drop(['Usage'], axis=1)
-    print(test_data.shape)
-    train_data_list = []
-    for file in train_data_file_paths:
-        train_data_1 = pd.read_csv(file, compression='gzip')
-        train_data_list.append(train_data_1)
-    train_data = pd.concat(train_data_list)
-    print(train_data.shape)
-    return train_data, test_data
-    
-    # now we map the emotion numbers to their label
-emotion_map = {0: 'Angry', 1: 'Digust', 2: 'Fear', 3: 'Happy', 4: 'Sad', 5: 'Surprise', 6: 'Neutral'}
-emotion_labels = ['Angry', 'Disgust', 'Fear', 'Happy', 'Sad', 'Surprise', 'Neutral']
+    x_train, y_train = _split_data(train_data)
+    x_test, y_test = _split_data(test_data)
+    return x_train, y_train, x_test, y_test
 
-def split_data(df,dataName):
-    # convert pixel string to list of ints 
-    df['pixels'] = df['pixels'].apply(lambda pixel_seq: [int(pixel) for pixel in pixel_seq.split()])
-    data_X = tf.convert_to_tensor(np.array(df['pixels'].tolist(), dtype='float32').reshape(-1,48, 48,1)/255.0)
-    # one hot enconding 
-    data_Y = tf.keras.utils.to_categorical(df['emotion'], len(emotion_labels))  
-    return data_X, data_Y
 
-if __name__ == '__main__':
-    train_data, test_data = get_data()
-    train_x, train_y = split_data(train_data, "train")
-    test_x, test_y = split_data(test_data, "test")
-
+def shuffle(x: tf.Tensor, y: tf.Tensor, limit: int = None):
+    if not limit:
+        limit = x.shape[0]
+    indices = tf.random.shuffle(tf.range(start=0, limit=limit))
+    return tf.gather(x, indices), tf.gather(y, indices)
