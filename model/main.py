@@ -52,7 +52,7 @@ def main():
 
     y_pred, y_true = testModel(model=model, x_test=x_test, y_test=y_test)
     print('Model Test Accuracy: ', accuracy_score(y_true, y_test))
-    viz_test_confusion_matrix(y_pred, y_true)
+    #viz_test_confusion_matrix(y_pred, y_true)
 
     saveModel(model=model)
 
