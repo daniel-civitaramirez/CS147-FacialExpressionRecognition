@@ -7,6 +7,8 @@ from tensorflow.keras.models import Sequential
 from regularization import RescaleLayer, DataAugmentLayer
 
 IMG_DIM = 48
+EMOTION_CLASSIFICATION = {0: 'Angry', 1: 'Digust', 2: 'Fear',
+                          3: 'Happy', 4: 'Sad', 5: 'Surprise', 6: 'Neutral'}
 
 def ConvultionLayer():
     return Sequential(
@@ -52,3 +54,15 @@ def testModel(model, x_test, y_test):
 
 def saveModel(model):
     pass
+
+def loadModel():
+    pass
+
+def predictEmotion(model, image):
+    image = tf.keras.utils.img_to_array(image)
+    predicition = model.predict(image)[0]
+    prob = np.max(predicition)
+    emotion_index = np.argmax(predicition)
+    emotion_label = EMOTION_CLASSIFICATION[emotion_index]
+    return emotion_index, emotion_label, prob
+
