@@ -11,6 +11,7 @@ from filter import filter_application
 import sys
 sys.path.append('../model')
 from cnn import predictEmotion, loadModel
+import tensorflow as tf
 
 
 def live_detection(model):
@@ -46,11 +47,11 @@ def live_detection(model):
     (x,y,width,height) = cascade.detectMultiScale(gray_frame, 1.3, 7, minSize=(35, 35))[0]
 
     cropped_face = gray_frame[int(y):int(y+height),x:int(x+width)]
-    scaled_face_undivided = cv2.resize(cropped_face, (48,48), 0,0, interpolation=cv2.INTER_AREA)/255
+    scaled_face_undivided = tf.reshape(tf.convert_to_tensor(cv2.resize(cropped_face, (48,48), 0,0, interpolation=cv2.INTER_AREA)/255), [1,48,48,1])
 
 
-    emotion_index,_,_ = predictEmotion(model, scaled_face_undivided)
-    print("emotion selected!")
+    emotion_index,emotion,_ = predictEmotion(model, scaled_face_undivided)
+    print("emotion selected!", emotion)
 
     filter_application(img_name, emotion_index)
     print("filter applied!")
