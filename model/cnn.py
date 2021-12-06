@@ -36,10 +36,10 @@ def generateModel(num_emotion=7):
 
             layers.Flatten(),
 
-            layers.Dense(units=1, activation='relu'),
+            layers.Dense(units=256, activation='relu'),
             layers.BatchNormalization(),
 
-            layers.Dense(units=1, activation='relu'),
+            layers.Dense(units=128, activation='relu'),
             layers.BatchNormalization(),
 
             layers.Dense(units=num_emotion, activation='softmax')
