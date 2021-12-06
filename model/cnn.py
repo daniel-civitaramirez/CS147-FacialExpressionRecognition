@@ -16,31 +16,37 @@ def generateModel(num_emotion=7):
         [
             layers.InputLayer(input_shape=(IMG_DIM, IMG_DIM, 1)),
 
-            layers.Conv2D(filters=64, kernel_size=(3, 3), strides=(1, 1), padding='SAME', activation='relu'),
+            layers.Conv2D(filters=64, kernel_size=(3, 3), strides=(1, 1), padding='SAME'),
             layers.BatchNormalization(),
+            layers.Activation('relu'),
             layers.MaxPool2D(pool_size=(2, 2), strides=(2, 2)),
 
-            layers.Conv2D(filters=128, kernel_size=(3, 3), strides=(1, 1), padding='SAME', activation='relu'),
+            layers.Conv2D(filters=128, kernel_size=(3, 3), strides=(1, 1), padding='SAME'),
             layers.BatchNormalization(),
+            layers.Activation('relu'),
             layers.MaxPool2D(pool_size=(2, 2), strides=(2, 2)),
 
-            layers.Conv2D(filters=512, kernel_size=(3, 3), strides=(1, 1), padding='SAME', activation='relu'),
+            layers.Conv2D(filters=512, kernel_size=(3, 3), strides=(1, 1), padding='SAME'),
             layers.BatchNormalization(),
+            layers.Activation('relu'),
             layers.MaxPool2D(pool_size=(2, 2), strides=(2, 2)),
 
-            layers.Conv2D(filters=512, kernel_size=(3, 3), strides=(1, 1), padding='SAME', activation='relu'),
+            layers.Conv2D(filters=512, kernel_size=(3, 3), strides=(1, 1), padding='SAME'),
             layers.BatchNormalization(),
+            layers.Activation('relu'),
             layers.MaxPool2D(pool_size=(2, 2), strides=(2, 2)),
 
-            layers.Dropout(rate=0.2),
+            layers.SpatialDropout2D(rate=0.1),
 
             layers.Flatten(),
 
-            layers.Dense(units=256, activation='relu'),
+            layers.Dense(units=512, activation='relu'),
             layers.BatchNormalization(),
+            layers.Dropout(rate=0.2),
 
             layers.Dense(units=128, activation='relu'),
             layers.BatchNormalization(),
+            layers.Dropout(rate=0.2),
 
             layers.Dense(units=num_emotion, activation='softmax')
         ]
