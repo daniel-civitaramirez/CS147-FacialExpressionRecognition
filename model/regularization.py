@@ -3,21 +3,16 @@ import numpy as np
 from tensorflow import keras
 from tensorflow.keras import layers
 from tensorflow.keras.models import Sequential
+from keras.preprocessing.image import ImageDataGenerator
 
 
-def RescaleLayer():
-    return Sequential(
-        [
-            layers.Rescaling(scale=1./255)
-        ]
+def DataAgumentationGenerator():
+    return ImageDataGenerator(
+        featurewise_center=False,
+        samplewise_center=False,
+        rotation_range=10,
+        width_shift_range=0.1,
+        height_shift_range=0.1,
+        zoom_range=0.1,
+        horizontal_flip=True
     )
-
-def DataAugmentLayer(): 
-    return Sequential(
-        [
-            layers.RandomFlip(mode="horizontal"),
-            layers.RandomRotation(factor=0.1),
-            layers.RandomTranslation(height_factor=0.1, width_factor=0.1),
-            layers.RandomZoom(height_factor=0.1),
-        ]
-    )   
