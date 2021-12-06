@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
 from sklearn.metrics import accuracy_score, confusion_matrix
+import visualkeras
 
 import sys
 sys.path.append('../data')
@@ -35,7 +36,7 @@ def viz_training_results(history, epochs=50):
     plt.legend(loc='upper right')
     plt.title('Training and Validation Loss')
 
-    plt.savefig('train_results.png')
+    plt.savefig('graphs/train_results.png')
 
 
 def viz_test_confusion_matrix(y_pred, y_true, labels):
@@ -66,7 +67,14 @@ def viz_test_confusion_matrix(y_pred, y_true, labels):
 
     fig.tight_layout()
     
-    fig.savefig('test_confusion_matrix.png')
+    fig.savefig('graphs/test_confusion_matrix.png')
+
+def viz_model_summary(model):
+    with open('graphs/model_summary.txt', 'w+') as f:
+        model.summary(print_fn=lambda x: f.write(x + '\n'))
+
+def viz_model(model):
+    visualkeras.layered_view(model, to_file='graphs/model.png')
 
 def main():
     x_train, y_train, x_val, y_val, x_test, y_test = get_data(
@@ -74,8 +82,11 @@ def main():
                                                     _DEFAULT_VALIDATION_FILEPATH, 
                                                     _DEFAULT_TEST_FILEPATH)
     model = generateModel()
-    model, history = trainModel(model=model, x_train=x_train, y_train=y_train, x_val=x_val, y_val=y_val, epochs=50)
-    viz_training_results(history=history, epochs=50)
+    viz_model_summary(model=model)
+    viz_model(model=model)
+
+    model, history = trainModel(model=model, x_train=x_train, y_train=y_train, x_val=x_val, y_val=y_val, epochs=35)
+    viz_training_results(history=history, epochs=35)
 
     y_pred, y_true = testModel(model=model, x_test=x_test, y_test=y_test)
     test_acc = accuracy_score(y_true, y_pred)
