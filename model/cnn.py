@@ -21,7 +21,7 @@ def ConvultionLayer():
             layers.BatchNormalization(),
             layers.MaxPool2D(pool_size=(2, 2), strides=(2, 2)),
 
-            layers.Conv2D(filters=256, kernel_size=(3, 3),strides=(1, 1), padding='SAME', activation='relu'),
+            layers.Conv2D(filters=512, kernel_size=(3, 3),strides=(1, 1), padding='SAME', activation='relu'),
             layers.BatchNormalization(),
             layers.MaxPool2D(pool_size=(2, 2), strides=(2, 2)),
 
