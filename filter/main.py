@@ -8,7 +8,9 @@ import numpy as np
 from pixellib.tune_bg import alter_bg
 from PIL import Image
 from filter import filter_application
-from model.cnn import predictEmotion, loadModel
+import sys
+sys.path.append('../model')
+from cnn import predictEmotion, loadModel
 
 
 def live_detection(model):
@@ -44,11 +46,9 @@ def live_detection(model):
     (x,y,width,height) = cascade.detectMultiScale(gray_frame, 1.3, 7, minSize=(35, 35))[0]
 
     cropped_face = gray_frame[int(y):int(y+height),x:int(x+width)]
-    scaled_face_undivided = cv2.resize(cropped_face, (48,48), 0,0, interpolation=cv2.INTER_AREA)
+    scaled_face_undivided = cv2.resize(cropped_face, (48,48), 0,0, interpolation=cv2.INTER_AREA)/255
 
 
-    ##associate color to emotion -- pass the correct color to the output line so that it can be 
-    ##changed and shown.
     emotion_index,_,_ = predictEmotion(model, scaled_face_undivided)
     print("emotion selected!")
 
@@ -59,7 +59,7 @@ def live_detection(model):
     
 
 def main():
-    file_name = "cnn_weights.h5"
+    file_name = "../model/cnn_weights.h5"
     model = loadModel(file_name)
     live_detection(model)
 
