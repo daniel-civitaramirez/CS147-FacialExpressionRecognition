@@ -19,7 +19,7 @@ def live_detection(model):
     haar_model = os.path.join(cv2_base_dir, 'data/haarcascade_frontalface_default.xml')
     cascade = cv2.CascadeClassifier(haar_model)
     camera = cv2.VideoCapture(0)
-    cv2.namedWindow("Camera")
+    cv2.namedWindow("Camera", cv2.WND_PROP_TOPMOST)
     image_counter = 0
     while image_counter==0:
         ret, frame = camera.read()
