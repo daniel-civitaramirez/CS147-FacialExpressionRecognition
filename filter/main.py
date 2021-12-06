@@ -19,7 +19,8 @@ def live_detection(model):
     haar_model = os.path.join(cv2_base_dir, 'data/haarcascade_frontalface_default.xml')
     cascade = cv2.CascadeClassifier(haar_model)
     camera = cv2.VideoCapture(0)
-    cv2.namedWindow("Camera", cv2.WND_PROP_TOPMOST)
+    cv2.namedWindow("Camera", cv2.WINDOW_NORMAL)
+    os.system('''/usr/bin/osascript -e 'tell app "Finder" to set frontmost of process "Python" to true' ''')
     image_counter = 0
     while image_counter==0:
         ret, frame = camera.read()
@@ -47,11 +48,11 @@ def live_detection(model):
     (x,y,width,height) = cascade.detectMultiScale(gray_frame, 1.3, 7, minSize=(35, 35))[0]
 
     cropped_face = gray_frame[int(y):int(y+height),x:int(x+width)]
-    scaled_face_undivided = tf.reshape(tf.convert_to_tensor(cv2.resize(cropped_face, (48,48), 0,0, interpolation=cv2.INTER_AREA)/255), [1,48,48,1])
+    scaled_face = tf.reshape(tf.convert_to_tensor(cv2.resize(cropped_face, (48,48), 0,0, interpolation=cv2.INTER_AREA)/255), [1,48,48,1])
 
 
-    emotion_index,emotion,_ = predictEmotion(model, scaled_face_undivided)
-    print("emotion selected!", emotion)
+    emotion_index,emotion,_ = predictEmotion(model, scaled_face)
+    print("emotion selected:", emotion)
 
     filter_application(img_name, emotion_index)
     print("filter applied!")
