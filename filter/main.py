@@ -6,7 +6,7 @@ import os
 import cv2
 import numpy as np
 from pixellib.tune_bg import alter_bg
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 from filter import filter_application
 import sys
 sys.path.append('../model')
@@ -57,8 +57,18 @@ def live_detection(model):
     filter_application(img_name, emotion_index)
     print("filter applied!")
     image = Image.open('output_im.png') 
-    image.show()
-    
+    width,height = image.size
+    bi = Image.new('RGBA', (width+10, height+(height//5)), 'white')
+    bi.paste(image, (5,5,(width+5), (height+5)))
+
+    caption= emotion
+    font= ImageFont.truetype("arial.ttf", 45)
+    w,h = font.getsize(caption)
+    draw = ImageDraw.Draw(bi)
+    draw.text(((width-w)/2, (height+((height/5)-h)/2)), caption, font=font, fill="black")
+    bi.save("final_output.png")
+    bi.show()
+
 
 def main():
     file_name = "../model/cnn_weights.h5"
